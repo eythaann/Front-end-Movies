@@ -1,1 +1,3 @@
-export const routes = {};
+import PrincipalsRoutes from "./PrincipalsRoutes";
+
+export { PrincipalsRoutes };
