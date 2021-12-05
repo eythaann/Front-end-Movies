@@ -1,1 +1,3 @@
-export const common = {};
+import url from "./url";
+
+export { url };

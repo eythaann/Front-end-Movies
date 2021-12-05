@@ -7,7 +7,7 @@ const Header = (): JSX.Element => {
       <div>
         <Link to="/">Home</Link>
         <Link to="/movies">Movies</Link>
-        <Link to="/Actors">Actors</Link>
+        <Link to="/actors">Actors</Link>
       </div>
     </header>
   );

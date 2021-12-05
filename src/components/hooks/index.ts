@@ -1,1 +1,3 @@
-export const hooks = {};
+import Api from "./Api";
+
+export { Api };
