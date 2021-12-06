@@ -1,11 +1,12 @@
 import { Outlet } from "react-router";
-import { Header } from "../components/layouts";
+import { Footer, Header } from "../components/layouts";
 
 const PrincipalsRoutes = (): JSX.Element => {
   return (
     <div>
       <Header />
       <Outlet />
+      <Footer />
     </div>
   );
 };

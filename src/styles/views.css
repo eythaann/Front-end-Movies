@@ -1,0 +1,12 @@
+.container {
+  min-height: 90vh;
+  display: flex;
+  justify-content: center;
+}
+
+.content {
+  margin-top: 60px;
+  margin-bottom: 80px;
+  width: 98%;
+  max-width: 1200px;
+}

@@ -5,6 +5,9 @@ const Header = (): JSX.Element => {
   return (
     <header className={style.header}>
       <div>
+        <Link to="/">MOVIES SA</Link>
+      </div>
+      <div>
         <Link to="/">Home</Link>
         <Link to="/movies">Movies</Link>
         <Link to="/actors">Actors</Link>

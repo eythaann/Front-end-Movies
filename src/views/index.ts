@@ -1,3 +1,5 @@
+import "../styles/views.css";
+
 import Home from "./Home/Home";
 import Actors from "./Actors/Actors";
 import Movies from "./Movies/Movies";

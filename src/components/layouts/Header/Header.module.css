@@ -1,4 +1,28 @@
 .header {
-  background-color: #555;
-  color: #eee;
+  background-color: #fff;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 50px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0px 1px 10px #5554;
+  z-index: 100;
+}
+
+a {
+  padding: 8px 20px;
+  margin: 0 5px;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: bold;
+  transition: linear 200ms;
+}
+
+a:hover {
+  color: #008b8b;
+  background-color: #008b8b10;
+  transition: linear 200ms;
 }

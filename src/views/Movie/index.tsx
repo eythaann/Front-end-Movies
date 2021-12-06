@@ -7,13 +7,17 @@ const Movie = (): JSX.Element => {
   let { id } = useParams();
 
   useEffect(() => {
-    Api(`/movie/${id}`, setMovie);
+    Api(`/movie/${id}`).then((data) => {
+      setMovie(data);
+    });
   }, []);
 
   return (
-    <div>
-      <h1>Movie</h1>
-      {JSON.stringify(movie)}
+    <div className="container">
+      <div className="content">
+        <h1>Movie</h1>
+        {JSON.stringify(movie)}
+      </div>
     </div>
   );
 };

@@ -1,7 +1,9 @@
 const NotFound404 = () => {
   return (
-    <div>
-      <p> 404 </p>
+    <div className="container">
+      <div className="content">
+        <h1>404</h1>
+      </div>
     </div>
   );
 };
