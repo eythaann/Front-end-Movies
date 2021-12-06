@@ -1,0 +1,67 @@
+.content {
+  display: grid;
+  grid-auto-flow: dense;
+  grid-auto-rows: min-content;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 12rem), 1fr));
+  gap: 1rem;
+}
+
+.menu {
+  display: grid;
+}
+
+.moviesList {
+  width: 100%;
+  display: grid;
+  gap: 10px;
+  grid-auto-flow: dense;
+  grid-auto-rows: 25rem;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 12rem), 1fr));
+  grid-column: span 4;
+}
+.a {
+  padding: 0;
+  margin: 0;
+  flex: 8;
+}
+.target {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  background-color: #eee;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 2px 1px 8px #6665;
+  transition: ease 500ms;
+}
+
+.target > div {
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.rating {
+  display: flex;
+}
+
+img {
+  max-width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.targetLoading {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  background-color: #eee;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 2px 1px 8px #6665;
+  transition: ease 500ms;
+}

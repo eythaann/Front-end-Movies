@@ -1,5 +1,5 @@
 import styles from "./Movies.module.css";
-import { Props, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Api } from "../../components/hooks";
 import { Link } from "react-router-dom";
 import { url } from "../../components/common";
@@ -51,7 +51,7 @@ const MovieList = (props: any): JSX.Element => {
     for (let i = 1; i <= 10; i++) {
       loading.push(<div className={styles.targetLoading}></div>);
     }
-    return <div className={styles.movielist}>{loading}</div>;
+    return <div className={styles.moviesList}>{loading}</div>;
   }
   const list = props.movies.map((item: any, i: number) => {
     return (
