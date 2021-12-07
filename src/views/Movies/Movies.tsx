@@ -81,7 +81,4 @@ const MovieList = (props: any): JSX.Element => {
   return <div className={styles.moviesList}>{list}</div>;
 };
 
-function FormDialog() {
-  return <div></div>;
-}
 export default Movies;
