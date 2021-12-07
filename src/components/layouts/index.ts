@@ -1,4 +1,4 @@
 import Header from "./Header/Header";
 import Footer from "./Footer";
-
-export { Header, Footer };
+import AddMovie from "./AddMovie";
+export { Header, Footer, AddMovie };

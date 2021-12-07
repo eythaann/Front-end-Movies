@@ -40,7 +40,7 @@ const Actor = () => {
     return (
       <div className={style.actor} key={actor.id}>
         <div className={style.actorImage}>
-          <img src={url + actor.img} />
+          <img src={url + actor.img} alt={actor.name} />
         </div>
         <div className={style.actorDescription}>
           <h2>{actor.name}</h2>
@@ -51,7 +51,7 @@ const Actor = () => {
             <div className={style.interpretations}>
               {actor.interpretations.map((item: any) => (
                 <Link to={`/movie/${item.id}`} key={item.id}>
-                  <img src={url + item.img} />
+                  <img src={url + item.img} alt={item.title} />
 
                   <h4>{item.title}</h4>
                   <p>{item.interpretation}</p>

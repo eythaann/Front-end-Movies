@@ -4,6 +4,7 @@ import { Api } from "../../components/hooks";
 import { Link } from "react-router-dom";
 import { url } from "../../components/common";
 import { Grow, Rating, TextField } from "@mui/material";
+import { AddMovie } from "../../components/layouts";
 
 let cache: any = [];
 const Movies = () => {
@@ -19,7 +20,6 @@ const Movies = () => {
   }, []);
 
   const search = (e: any) => {
-    console.log(e.target.value);
     const searched = e.target.value.toLowerCase();
     setMovies(
       cache.filter((v: any) => v.title.toLowerCase().includes(searched))
@@ -37,6 +37,8 @@ const Movies = () => {
               type="search"
               onChange={search}
             />
+            <p>Don't find your movie? add it!</p>
+            <AddMovie />
           </div>
           <MovieList loaded={loaded} movies={movies} />
         </div>
@@ -49,7 +51,7 @@ const MovieList = (props: any): JSX.Element => {
   if (!props.loaded) {
     let loading = [];
     for (let i = 1; i <= 10; i++) {
-      loading.push(<div className={styles.targetLoading}></div>);
+      loading.push(<div key={i} className={styles.targetLoading}></div>);
     }
     return <div className={styles.moviesList}>{loading}</div>;
   }
@@ -59,10 +61,11 @@ const MovieList = (props: any): JSX.Element => {
         in={props.loaded}
         style={{ transformOrigin: "0 0 0" }}
         timeout={Math.min((i + 1) * 400, 2000)}
+        key={item.id}
       >
-        <div className={styles.target} key={item.id}>
+        <div className={styles.target}>
           <Link className={styles.a} to={`/movie/${item.id}`}>
-            <img src={url + item.img} />
+            <img src={url + item.img} alt={item.title} />
           </Link>
           <div>
             <h3>{item.title}</h3>
@@ -78,4 +81,7 @@ const MovieList = (props: any): JSX.Element => {
   return <div className={styles.moviesList}>{list}</div>;
 };
 
+function FormDialog() {
+  return <div></div>;
+}
 export default Movies;

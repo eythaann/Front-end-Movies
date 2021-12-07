@@ -15,26 +15,22 @@
   font-size: 1.5rem;
 }
 
-.actor {
+.movie {
   display: flex;
   min-height: 400px;
 }
 
-img {
-  object-fit: cover;
-}
-.actorImage {
+.movieImage {
   width: 30%;
-  margin-right: 10px;
   border-radius: 15px;
   overflow: hidden;
+  margin-right: 10px;
 }
-
-.actorDescription {
+.movieDescription {
   width: 70%;
 }
 
-.interpretations {
+.cast {
   display: flex;
   overflow-x: auto;
   overflow-y: hidden;
@@ -44,7 +40,7 @@ img {
   padding-bottom: 10px;
 }
 
-.interpretations > a {
+.cast a {
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -62,14 +58,15 @@ img {
 }
 
 @media only screen and (max-width: 600px) {
-  .actor {
+  .movie {
     flex-direction: column;
   }
-  .actorImage {
+
+  .movieImage {
     width: 100%;
     height: max(60vh, 400px);
   }
-  .actorDescription {
+  .movieDescription {
     width: 100%;
   }
 }

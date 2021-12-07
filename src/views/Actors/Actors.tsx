@@ -19,7 +19,6 @@ const Actors = () => {
   }, []);
 
   const search = (e: any) => {
-    console.log(e.target.value);
     const searched = e.target.value.toLowerCase();
     setActors(
       cache.filter((v: any) => v.name.toLowerCase().includes(searched))
@@ -63,7 +62,7 @@ const ActorsList = (props: any): JSX.Element => {
       >
         <div className={styles.target} key={item.id}>
           <Link className={styles.a} to={`/actor/${item.id}`}>
-            <img src={url + item.img} />
+            <img src={url + item.img} alt={item.name} />
           </Link>
           <div>
             <h3>{item.name}</h3>
