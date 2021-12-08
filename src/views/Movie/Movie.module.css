@@ -24,7 +24,7 @@
   width: 30%;
   border-radius: 15px;
   overflow: hidden;
-  margin-right: 10px;
+  margin-right: 2rem;
 }
 .movieDescription {
   width: 70%;
@@ -52,8 +52,8 @@
   display: flex;
   flex-direction: column;
   margin-right: 10px;
-  min-width: 150px;
-  max-width: 250px;
+  min-width: 170px;
+  max-width: 230px;
   min-height: 240px;
   list-style: none;
   background-color: #eee;
@@ -62,6 +62,11 @@
   font-size: 0.8rem;
   padding: 0 0 5px 0;
   box-shadow: 2px 2px 5px 2px #1111;
+}
+
+.cast a p {
+  font-weight: normal;
+  font-size: 12px;
 }
 
 @media only screen and (max-width: 600px) {
@@ -73,6 +78,7 @@
     width: 100%;
     height: max(60vh, 400px);
     margin-bottom: 1rem;
+    margin-right: 0;
   }
   .movieDescription {
     width: 100%;

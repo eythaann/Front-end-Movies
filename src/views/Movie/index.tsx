@@ -1,10 +1,10 @@
 import style from "./Movie.module.css";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
-import { Api } from "../../components/hooks";
+import { Api, useDark } from "../../components/hooks";
 import { Link } from "react-router-dom";
 import { publicFolder } from "../../components/common";
-import { Grow, Rating, Skeleton } from "@mui/material";
+import { Button, Grow, Rating, Skeleton } from "@mui/material";
 import { DeleteMovie, AddCast, EditMovie } from "../../components/layouts";
 
 const Movie = (): JSX.Element => {
@@ -33,11 +33,14 @@ const Movie = (): JSX.Element => {
       }
     });
   }, []);
-
+  const dark = useDark();
   //if not exist Movie show a error message
   if (movie.error) {
     return (
-      <div className="container">
+      <div
+        className="container"
+        style={dark ? { background: "#333", color: "#fff" } : {}}
+      >
         <div className="content">
           <div className={style.error}>
             <p>Movie not found</p>
@@ -51,7 +54,10 @@ const Movie = (): JSX.Element => {
   //if  exist Movie show the info
   // loaded? if for show the Skeleton while is charging
   return (
-    <div className="container">
+    <div
+      className="container"
+      style={dark ? { background: "#333", color: "#fff" } : {}}
+    >
       <div className="content">
         <div className={style.movie} key={movie.id}>
           <div className={style.movieImage}>
@@ -101,29 +107,48 @@ const Movie = (): JSX.Element => {
               </div>
             )}
             <br />
-            //This are the Casts List of the Movie
-            {loaded ? (
-              <div style={{ position: "relative", top: "0", left: "0" }}>
-                <h4>Casting: </h4>
-                <AddCast movieId={movie.id} />
-                <div className={style.cast}>
-                  {movie.cast.map((item: any) => (
-                    <Link to={`/actor/${item.id}`} key={item.id}>
-                      <img src={publicFolder + item.img} alt={item.name} />
-                      <h4>{item.name}</h4>
-                      <p>{item.interpretation}</p>
-                    </Link>
-                  ))}
+
+            {
+              //This are the Casts List of the Movie
+              loaded ? (
+                <div style={{ position: "relative", top: "0", left: "0" }}>
+                  <h4>Casting: </h4>
+                  <div style={{ display: "flex" }}>
+                    <AddCast movieId={movie.id} />
+                    <Button
+                      style={{ marginLeft: "5px" }}
+                      href={movie.trailerLink}
+                      target="_blank"
+                      variant="outlined"
+                    >
+                      ▶
+                    </Button>
+                  </div>
+                  <div className={style.cast}>
+                    {movie.cast.map((item: any) => (
+                      <Link
+                        to={`/actor/${item.id}`}
+                        key={item.id}
+                        style={
+                          dark ? { background: "#444", color: "#fff" } : {}
+                        }
+                      >
+                        <img src={publicFolder + item.img} alt={item.name} />
+                        <h4>{item.name}</h4>
+                        <p>{item.interpretation}</p>
+                      </Link>
+                    ))}
+                  </div>
                 </div>
-              </div>
-            ) : (
-              //This are the Skeleton of Cast
-              <div style={{ position: "relative", top: "0", left: "0" }}>
-                <Skeleton variant="rectangular" width="100px" height="30px" />
-                <br />
-                <Skeleton variant="rectangular" width="100%" height="100px" />
-              </div>
-            )}
+              ) : (
+                //This are the Skeleton of Cast
+                <div style={{ position: "relative", top: "0", left: "0" }}>
+                  <Skeleton variant="rectangular" width="150px" height="30px" />
+                  <br />
+                  <Skeleton variant="rectangular" width="100%" height="100px" />
+                </div>
+              )
+            }
           </div>
         </div>
       </div>

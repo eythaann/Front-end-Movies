@@ -13,7 +13,7 @@ import {
 } from "@mui/material";
 
 import { url } from "../../common";
-import { Api } from "../../hooks";
+import { Api, useDark } from "../../hooks";
 
 const AddMovie = () => {
   const [open, setOpen] = useState(false);
@@ -28,7 +28,7 @@ const AddMovie = () => {
     gener: "",
     duration: "",
   });
-
+  const dark = useDark();
   const [errorForm, setErrorForm] = useState({
     description: false,
   });
@@ -89,8 +89,12 @@ const AddMovie = () => {
         Add New Movie
       </Button>
       <Dialog open={open} onClose={handleClose}>
-        <DialogTitle>New Movie</DialogTitle>
-        <DialogContent>
+        <DialogTitle style={dark ? { background: "#444", color: "#fff" } : {}}>
+          New Movie
+        </DialogTitle>
+        <DialogContent
+          style={dark ? { background: "#444", color: "#fff" } : {}}
+        >
           <DialogContentText>Please fill all fields</DialogContentText>
           <form onSubmit={postmovie} className={style.form}>
             <TextField
@@ -100,6 +104,7 @@ const AddMovie = () => {
               onChange={onChange}
               label="Movie's Name"
               fullWidth
+              style={dark ? { background: "#eaeaea" } : {}}
             />
             <TextField
               required
@@ -113,6 +118,7 @@ const AddMovie = () => {
               id="description"
               label="Description"
               fullWidth
+              style={dark ? { background: "#eaeaea" } : {}}
             />
             <div
               style={{
@@ -128,6 +134,7 @@ const AddMovie = () => {
                 onChange={onChange}
                 label="premiere"
                 type="date"
+                style={dark ? { background: "#eaeaea" } : {}}
               />
               <Rating name="rating" value={form.rating} onChange={onChange} />
             </div>
@@ -137,8 +144,10 @@ const AddMovie = () => {
               type="file"
               fullWidth
               onChange={onChangeImg}
+              style={dark ? { background: "#eaeaea" } : {}}
             />
             <Autocomplete
+              style={dark ? { background: "#eaeaea" } : {}}
               options={options.map((option) => option.tag)}
               fullWidth
               renderInput={(params) => (
@@ -155,6 +164,7 @@ const AddMovie = () => {
               )}
             />
             <TextField
+              style={dark ? { background: "#eaeaea" } : {}}
               required
               name="duration"
               value={form.duration}
@@ -164,6 +174,7 @@ const AddMovie = () => {
               onChange={onChange}
             />
             <TextField
+              style={dark ? { background: "#eaeaea" } : {}}
               required
               name="trailerLink"
               value={form.trailerLink}
@@ -179,8 +190,12 @@ const AddMovie = () => {
             </div>
           </form>
         </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose}>Cancel</Button>
+        <DialogActions
+          style={dark ? { background: "#444", color: "#fff" } : {}}
+        >
+          <Button onClick={handleClose} style={dark ? { color: "#fff" } : {}}>
+            Cancel
+          </Button>
         </DialogActions>
       </Dialog>
     </div>

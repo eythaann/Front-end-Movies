@@ -7,8 +7,9 @@
 }
 
 .menu {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-auto-rows: min-content;
+  gap: 15px;
 }
 
 .moviesList {

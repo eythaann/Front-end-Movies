@@ -9,7 +9,7 @@ import {
   DialogTitle,
   TextField,
 } from "@mui/material";
-import { Api } from "../../hooks";
+import { Api, useDark } from "../../hooks";
 import { url } from "../../common";
 
 const AddInterpretations = (props: { actorId: string }) => {
@@ -19,7 +19,7 @@ const AddInterpretations = (props: { actorId: string }) => {
     movieId: "",
     interpretation: "",
   });
-
+  const dark = useDark();
   const dialogOpen = () => setOpen(true);
   const dialogClose = () => setOpen(false);
 
@@ -42,7 +42,7 @@ const AddInterpretations = (props: { actorId: string }) => {
       actorId: props.actorId,
       interpretation: form.interpretation,
     };
-    console.log(form, form2);
+
     try {
       const res = await fetch(url + "/cast", {
         method: "POST",
@@ -53,6 +53,9 @@ const AddInterpretations = (props: { actorId: string }) => {
       });
 
       const data = await res.json();
+      if (data.alert) {
+        alert(data.alert);
+      }
       if (data.done) {
         setOpen(false);
         window.location.reload();
@@ -68,10 +71,15 @@ const AddInterpretations = (props: { actorId: string }) => {
         + interpretations
       </Button>
       <Dialog open={open} onClose={dialogClose}>
-        <DialogTitle>Add interpretation</DialogTitle>
-        <DialogContent>
+        <DialogTitle style={dark ? { background: "#444", color: "#fff" } : {}}>
+          Add interpretation
+        </DialogTitle>
+        <DialogContent
+          style={dark ? { background: "#444", color: "#fff" } : {}}
+        >
           <form onSubmit={submit} className={style.form}>
             <TextField
+              style={dark ? { background: "#eaeaea", color: "#fff" } : {}}
               name="interpretation"
               label="interpretation"
               value={form.interpretation}
@@ -80,21 +88,17 @@ const AddInterpretations = (props: { actorId: string }) => {
               fullWidth
             />
             <Autocomplete
+              style={dark ? { background: "#eaeaea", color: "#fff" } : {}}
+              value={form.movieId}
+              onChange={(event: any, newValue: string | null) => {
+                setForm({ ...form, movieId: newValue });
+              }}
               options={options.map(
                 (option: any) => option.title + " id:" + option.id
               )}
               fullWidth
               renderInput={(params) => (
-                <TextField
-                  {...params}
-                  required
-                  name="movieId"
-                  onSelect={onchange}
-                  onChange={onchange}
-                  value={form.movieId}
-                  label="Movie Title"
-                  type="search"
-                />
+                <TextField {...params} required label="Movie Title" />
               )}
             />
             <div>
@@ -104,8 +108,12 @@ const AddInterpretations = (props: { actorId: string }) => {
             </div>
           </form>
         </DialogContent>
-        <DialogActions>
-          <Button onClick={dialogClose}>Cancel</Button>
+        <DialogActions
+          style={dark ? { background: "#444", color: "#fff" } : {}}
+        >
+          <Button onClick={dialogClose} style={dark ? { color: "#fff" } : {}}>
+            Cancel
+          </Button>
         </DialogActions>
       </Dialog>
     </div>

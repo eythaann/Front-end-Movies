@@ -8,6 +8,7 @@ import {
 } from "@mui/material";
 import { useState } from "react";
 import { url } from "../../common";
+import { useDark } from "../../hooks";
 import style from "./EditActor.module.css";
 
 const EditActor = (props: { actor: any }) => {
@@ -24,6 +25,7 @@ const EditActor = (props: { actor: any }) => {
     biography: false,
   });
 
+  const dark = useDark();
   const showDialog = () => setDialog(true);
   const closeDialog = () => setDialog(false);
 
@@ -78,11 +80,16 @@ const EditActor = (props: { actor: any }) => {
         ✏️
       </Button>
       <Dialog open={dialog} onClose={closeDialog}>
-        <DialogTitle>Edit actor</DialogTitle>
+        <DialogTitle style={dark ? { background: "#444", color: "#fff" } : {}}>
+          Edit actor
+        </DialogTitle>
 
-        <DialogContent>
+        <DialogContent
+          style={dark ? { background: "#444", color: "#fff" } : {}}
+        >
           <form className={style.form} onSubmit={updateActor}>
             <TextField
+              style={dark ? { background: "#eaeaea", color: "#fff" } : {}}
               onChange={onChange}
               name="name"
               label="Name"
@@ -91,6 +98,7 @@ const EditActor = (props: { actor: any }) => {
               required
             />
             <TextField
+              style={dark ? { background: "#eaeaea", color: "#fff" } : {}}
               onChange={onChange}
               name="biography"
               label="Biography"
@@ -101,6 +109,7 @@ const EditActor = (props: { actor: any }) => {
               required
             />
             <TextField
+              style={dark ? { background: "#eaeaea", color: "#fff" } : {}}
               onChange={onChange}
               name="place"
               label="Place"
@@ -109,6 +118,7 @@ const EditActor = (props: { actor: any }) => {
               required
             />
             <TextField
+              style={dark ? { background: "#eaeaea", color: "#fff" } : {}}
               onChange={onChange}
               name="born"
               label="Born"
@@ -118,6 +128,7 @@ const EditActor = (props: { actor: any }) => {
               required
             />
             <TextField
+              style={dark ? { background: "#eaeaea", color: "#fff" } : {}}
               onChange={onChange}
               name="death"
               helperText="Death, if is live, leave this empty"
@@ -127,6 +138,7 @@ const EditActor = (props: { actor: any }) => {
             />
 
             <TextField
+              style={dark ? { background: "#eaeaea", color: "#fff" } : {}}
               name="image"
               onChange={onChangeImg}
               type="file"
@@ -138,8 +150,12 @@ const EditActor = (props: { actor: any }) => {
             </Button>
           </form>
         </DialogContent>
-        <DialogActions>
-          <Button onClick={closeDialog}>Cancel</Button>
+        <DialogActions
+          style={dark ? { background: "#444", color: "#fff" } : {}}
+        >
+          <Button onClick={closeDialog} style={dark ? { color: "#fff" } : {}}>
+            Cancel
+          </Button>
         </DialogActions>
       </Dialog>
     </div>

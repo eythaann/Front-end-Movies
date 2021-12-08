@@ -1,7 +1,7 @@
 import style from "./Actor.module.css";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
-import { Api } from "../../components/hooks";
+import { Api, useDark } from "../../components/hooks";
 import { Link } from "react-router-dom";
 import { publicFolder } from "../../components/common";
 import {
@@ -33,11 +33,14 @@ const Actor = () => {
       setloaded(true);
     });
   }, []);
-
+  const dark = useDark();
   //if not exist Actor show a error message
   if (actor.error) {
     return (
-      <div className="container">
+      <div
+        className="container"
+        style={dark ? { background: "#333", color: "#fff" } : {}}
+      >
         <div className="content">
           <div className={style.error}>
             <p>Actor not found</p>
@@ -51,7 +54,10 @@ const Actor = () => {
   //if  exist Actor show the info
   // loaded? if for show the Skeleton while is charging
   return (
-    <div className="container">
+    <div
+      className="container"
+      style={dark ? { background: "#333", color: "#fff" } : {}}
+    >
       <div className="content">
         <div className={style.actor} key={actor.id}>
           <div className={style.actorImage}>
@@ -104,29 +110,37 @@ const Actor = () => {
               </div>
             )}
             <br />
-            //This are the Interpretions List of the Actor
-            {loaded ? (
-              <div style={{ position: "relative", top: "0", left: "0" }}>
-                <AddInterpretation actorId={actor.id} />
-                <div className={style.interpretations}>
-                  {actor.interpretations.map((item: any) => (
-                    <Link to={`/movie/${item.id}`} key={item.id}>
-                      <img src={publicFolder + item.img} alt={item.title} />
+            {
+              //This are the Interpretions List of the Actor
+              loaded ? (
+                <div style={{ position: "relative", top: "0", left: "0" }}>
+                  <AddInterpretation actorId={actor.id} />
+                  <div className={style.interpretations}>
+                    {actor.interpretations.map((item: any) => (
+                      <Link
+                        to={`/movie/${item.id}`}
+                        key={item.id}
+                        style={
+                          dark ? { background: "#444", color: "#fff" } : {}
+                        }
+                      >
+                        <img src={publicFolder + item.img} alt={item.title} />
 
-                      <h4>{item.title}</h4>
-                      <p>{item.interpretation}</p>
-                    </Link>
-                  ))}
+                        <h4>{item.title}</h4>
+                        <p>{item.interpretation}</p>
+                      </Link>
+                    ))}
+                  </div>
                 </div>
-              </div>
-            ) : (
-              //This are the Skeleton of interpretation
-              <div style={{ position: "relative", top: "0", left: "0" }}>
-                <Skeleton variant="rectangular" width="100px" height="30px" />
-                <br />
-                <Skeleton variant="rectangular" width="100%" height="100px" />
-              </div>
-            )}
+              ) : (
+                //This are the Skeleton of interpretation
+                <div style={{ position: "relative", top: "0", left: "0" }}>
+                  <Skeleton variant="rectangular" width="100px" height="30px" />
+                  <br />
+                  <Skeleton variant="rectangular" width="100%" height="100px" />
+                </div>
+              )
+            }
           </div>
         </div>
       </div>

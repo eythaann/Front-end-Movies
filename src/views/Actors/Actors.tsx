@@ -1,9 +1,9 @@
 import styles from "./Actors.module.css";
 import { useEffect, useState } from "react";
-import { Api } from "../../components/hooks";
+import { Api, useDark, useForceUpdate } from "../../components/hooks";
 import { Link } from "react-router-dom";
 import { publicFolder } from "../../components/common";
-import { Grow, Skeleton, TextField } from "@mui/material";
+import { Button, Grow, Skeleton, TextField } from "@mui/material";
 import { AddActor } from "../../components/layouts";
 
 let cache: any = [];
@@ -11,6 +11,7 @@ let cache: any = [];
 const Actors = () => {
   const [actors, setActors] = useState([]);
   const [loaded, setLoaded] = useState(false);
+  const force = useForceUpdate();
   useEffect(() => {
     window.scrollTo(0, 0);
     Api("/actors").then((data) => {
@@ -29,21 +30,63 @@ const Actors = () => {
     );
   };
 
+  const orderAsc = () => {
+    cache.sort((a: any, b: any) => {
+      if (a.name.toLowerCase() > b.name.toLowerCase()) return 1;
+      if (a.name.toLowerCase() < b.name.toLowerCase()) return -1;
+      return 0;
+    });
+    setActors(cache);
+    force();
+  };
+
+  const orderDsc = () => {
+    cache.sort((a: any, b: any) => {
+      if (a.name.toLowerCase() < b.name.toLowerCase()) return 1;
+      if (a.name.toLowerCase() > b.name.toLowerCase()) return -1;
+      return 0;
+    });
+    setActors(cache);
+    force();
+  };
+  const dark = useDark();
   return (
-    <div className="container">
+    <div
+      className="container"
+      style={dark ? { background: "#333", color: "#fff" } : {}}
+    >
       <div className="content">
         <h1>Actors</h1>
         <div className={styles.content}>
-          <div className={styles.menu}>
-            <TextField
-              label="Search"
-              fullWidth
-              type="search"
-              onChange={search}
-            />
-            <p>Don`t found a Actor? Add it!</p>
-            <AddActor />
-          </div>
+          {loaded ? (
+            <Grow
+              in={loaded}
+              style={{ transformOrigin: "0 0 0" }}
+              timeout={600}
+            >
+              <div className={styles.menu}>
+                <TextField
+                  style={dark ? { background: "#999", color: "#fff" } : {}}
+                  label="Search"
+                  fullWidth
+                  type="search"
+                  onChange={search}
+                />
+                <Button onClick={orderAsc}>Order By Name Asc</Button>
+                <Button onClick={orderDsc}>Order By Name Dsc</Button>
+                <p>Don`t found a Actor? Add it!</p>
+                <AddActor />
+              </div>
+            </Grow>
+          ) : (
+            <div className={styles.menu}>
+              <Skeleton height="60px" />
+              <Skeleton height="60px" />
+              <Skeleton height="60px" />
+              <Skeleton height="60px" />
+            </div>
+          )}
+
           <ActorsList loaded={loaded} actors={actors} />
         </div>
       </div>
@@ -52,6 +95,7 @@ const Actors = () => {
 };
 //This is the principal Actors List
 const ActorsList = (props: any): JSX.Element => {
+  const dark = useDark();
   //while the data is loading show a Skeletont Layer
   if (!props.loaded) {
     let loading = [];
@@ -78,7 +122,10 @@ const ActorsList = (props: any): JSX.Element => {
         timeout={Math.min((i + 1) * 400, 2000)}
         key={item.id}
       >
-        <div className={styles.target}>
+        <div
+          className={styles.target}
+          style={dark ? { background: "#444", color: "#fff" } : {}}
+        >
           <Link className={styles.a} to={`/actor/${item.id}`}>
             <img src={publicFolder + item.img} alt={item.name} />
           </Link>

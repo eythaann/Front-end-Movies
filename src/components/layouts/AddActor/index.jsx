@@ -11,6 +11,7 @@ import {
 } from "@mui/material";
 
 import { url } from "../../common";
+import { useDark } from "../../hooks";
 
 const AddActor = () => {
   const [open, setOpen] = useState(false);
@@ -68,18 +69,23 @@ const AddActor = () => {
       console.log(err);
     }
   };
-
+  const dark = useDark();
   return (
     <div>
       <Button onClick={handleClickOpen} fullWidth variant="contained">
         Add New Actor
       </Button>
       <Dialog open={open} onClose={handleClose}>
-        <DialogTitle>New Actor</DialogTitle>
-        <DialogContent>
+        <DialogTitle style={dark ? { background: "#444", color: "#fff" } : {}}>
+          New Actor
+        </DialogTitle>
+        <DialogContent
+          style={dark ? { background: "#444", color: "#fff" } : {}}
+        >
           <DialogContentText>Please fill all fields</DialogContentText>
           <form onSubmit={postmovie} className={style.form}>
             <TextField
+              style={dark ? { background: "#eaeaea", color: "#fff" } : {}}
               required={true}
               name="name"
               value={form.name}
@@ -88,6 +94,7 @@ const AddActor = () => {
               fullWidth
             />
             <TextField
+              style={dark ? { background: "#eaeaea", color: "#fff" } : {}}
               required
               name="place"
               value={form.place}
@@ -97,6 +104,7 @@ const AddActor = () => {
               fullWidth
             />
             <TextField
+              style={dark ? { background: "#eaeaea", color: "#fff" } : {}}
               required
               error={errorForm.biography}
               helperText="min length 30"
@@ -109,6 +117,7 @@ const AddActor = () => {
               fullWidth
             />
             <TextField
+              style={dark ? { background: "#eaeaea", color: "#fff" } : {}}
               required
               name="born"
               value={form.born}
@@ -118,6 +127,7 @@ const AddActor = () => {
             />
             <span> </span>
             <TextField
+              style={dark ? { background: "#eaeaea", color: "#fff" } : {}}
               name="death"
               value={form.death}
               onChange={onChange}
@@ -125,6 +135,7 @@ const AddActor = () => {
               helperText="Death: if is live, leave this empty"
             />
             <TextField
+              style={dark ? { background: "#eaeaea", color: "#fff" } : {}}
               required
               name="image"
               type="file"
@@ -138,7 +149,9 @@ const AddActor = () => {
             </div>
           </form>
         </DialogContent>
-        <DialogActions>
+        <DialogActions
+          style={dark ? { background: "#444", color: "#fff" } : {}}
+        >
           <Button onClick={handleClose}>Cancel</Button>
         </DialogActions>
       </Dialog>

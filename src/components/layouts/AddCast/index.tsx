@@ -9,7 +9,7 @@ import {
   DialogTitle,
   TextField,
 } from "@mui/material";
-import { Api } from "../../hooks";
+import { Api, useDark } from "../../hooks";
 import { url } from "../../common";
 
 const AddCast = (props: { movieId: string }) => {
@@ -33,6 +33,8 @@ const AddCast = (props: { movieId: string }) => {
     });
   }, []);
 
+  const dark = useDark();
+
   const submit = async (e: any) => {
     e.preventDefault();
     let i = form.actorId.lastIndexOf("id:");
@@ -53,6 +55,10 @@ const AddCast = (props: { movieId: string }) => {
       });
 
       const data = await res.json();
+
+      if (data.alert) {
+        alert(data.alert);
+      }
       if (data.done) {
         setOpen(false);
         window.location.reload();
@@ -68,10 +74,15 @@ const AddCast = (props: { movieId: string }) => {
         + cast
       </Button>
       <Dialog open={open} onClose={dialogClose}>
-        <DialogTitle>Add cast</DialogTitle>
-        <DialogContent>
+        <DialogTitle style={dark ? { background: "#444", color: "#fff" } : {}}>
+          Add cast
+        </DialogTitle>
+        <DialogContent
+          style={dark ? { background: "#444", color: "#fff" } : {}}
+        >
           <form onSubmit={submit} className={style.form}>
             <TextField
+              style={dark ? { background: "#eaeaea", color: "#fff" } : {}}
               name="interpretation"
               label="interpretation"
               value={form.interpretation}
@@ -80,21 +91,17 @@ const AddCast = (props: { movieId: string }) => {
               fullWidth
             />
             <Autocomplete
+              style={dark ? { background: "#eaeaea", color: "#fff" } : {}}
+              value={form.actorId}
+              onChange={(event: any, newValue: string | null) => {
+                setForm({ ...form, actorId: newValue });
+              }}
               options={options.map(
                 (option: any) => option.name + " id:" + option.id
               )}
               fullWidth
-              renderInput={(params) => (
-                <TextField
-                  {...params}
-                  required
-                  name="actorId"
-                  onSelect={onchange}
-                  onChange={onchange}
-                  value={form.actorId}
-                  label="Actor's Name"
-                  type="search"
-                />
+              renderInput={(params: any) => (
+                <TextField {...params} required label="Actor's Name" />
               )}
             />
             <div>
@@ -104,8 +111,12 @@ const AddCast = (props: { movieId: string }) => {
             </div>
           </form>
         </DialogContent>
-        <DialogActions>
-          <Button onClick={dialogClose}>Cancel</Button>
+        <DialogActions
+          style={dark ? { background: "#444", color: "#fff" } : {}}
+        >
+          <Button onClick={dialogClose} style={dark ? { color: "#fff" } : {}}>
+            Cancel
+          </Button>
         </DialogActions>
       </Dialog>
     </div>

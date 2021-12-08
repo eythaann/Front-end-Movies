@@ -1,5 +1,6 @@
 import Api from "./Api";
-
+import { useForceUpdate } from "./useForceUpdate";
+import { useDark } from "./dark";
 //custom Hooks of the App
 
-export { Api };
+export { Api, useForceUpdate, useDark };

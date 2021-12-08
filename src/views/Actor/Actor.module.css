@@ -25,7 +25,7 @@ img {
 }
 .actorImage {
   width: 30%;
-  margin-right: 10px;
+  margin-right: 2rem;
   border-radius: 15px;
   overflow: hidden;
 }
@@ -52,13 +52,13 @@ img {
   padding-bottom: 10px;
 }
 
-.interpretations > a {
+.interpretations a {
   overflow: hidden;
   display: flex;
   flex-direction: column;
   margin-right: 10px;
-  min-width: 150px;
-  max-width: 250px;
+  min-width: 170px;
+  max-width: 230px;
   min-height: 240px;
   list-style: none;
   background-color: #eee;
@@ -69,6 +69,11 @@ img {
   box-shadow: 2px 2px 5px 2px #1111;
 }
 
+.interpretations a p {
+  font-weight: normal;
+  font-size: 12px;
+}
+
 @media only screen and (max-width: 600px) {
   .actor {
     flex-direction: column;
@@ -77,6 +82,7 @@ img {
     width: 100%;
     height: max(60vh, 400px);
     margin-bottom: 1rem;
+    margin-right: 0;
   }
   .actorDescription {
     width: 100%;

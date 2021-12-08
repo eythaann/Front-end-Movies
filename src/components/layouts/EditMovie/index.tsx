@@ -10,7 +10,7 @@ import {
 } from "@mui/material";
 import { useEffect, useState } from "react";
 import { url } from "../../common";
-import { Api } from "../../hooks";
+import { Api, useDark } from "../../hooks";
 import style from "./EditMovie.module.css";
 
 const EditMovie = (props: { movie: any }) => {
@@ -36,6 +36,7 @@ const EditMovie = (props: { movie: any }) => {
     });
   }, []);
 
+  const dark = useDark();
   const showDialog = () => setDialog(true);
   const closeDialog = () => setDialog(false);
 
@@ -94,11 +95,16 @@ const EditMovie = (props: { movie: any }) => {
         ✏️
       </Button>
       <Dialog open={dialog} onClose={closeDialog}>
-        <DialogTitle>Edit Movie</DialogTitle>
+        <DialogTitle style={dark ? { background: "#444", color: "#fff" } : {}}>
+          Edit Movie
+        </DialogTitle>
 
-        <DialogContent>
+        <DialogContent
+          style={dark ? { background: "#444", color: "#fff" } : {}}
+        >
           <form className={style.form} onSubmit={updateMovie}>
             <TextField
+              style={dark ? { background: "#eaeaea", color: "#fff" } : {}}
               onChange={onChange}
               name="title"
               label="Title"
@@ -107,6 +113,7 @@ const EditMovie = (props: { movie: any }) => {
               required
             />
             <TextField
+              style={dark ? { background: "#eaeaea", color: "#fff" } : {}}
               onChange={onChange}
               name="description"
               label="Description"
@@ -117,6 +124,7 @@ const EditMovie = (props: { movie: any }) => {
               required
             />
             <TextField
+              style={dark ? { background: "#eaeaea", color: "#fff" } : {}}
               onChange={onChange}
               name="premiere"
               label="Premiere"
@@ -127,6 +135,7 @@ const EditMovie = (props: { movie: any }) => {
             />
             <Rating name="rating" value={movie.rating} onChange={onChange} />
             <TextField
+              style={dark ? { background: "#eaeaea", color: "#fff" } : {}}
               name="image"
               onChange={onChangeImg}
               type="file"
@@ -134,22 +143,19 @@ const EditMovie = (props: { movie: any }) => {
               helperText="If don't wanna change the cover photo leave this empty"
             />
             <Autocomplete
+              style={dark ? { background: "#eaeaea", color: "#fff" } : {}}
               options={options.map((option: any) => option.tag)}
+              value={movie.gener}
+              onChange={(event: any, newValue: string | null) => {
+                setMovie({ ...movie, gener: newValue });
+              }}
               fullWidth
               renderInput={(params) => (
-                <TextField
-                  {...params}
-                  required
-                  name="gener"
-                  onSelect={onChange}
-                  onChange={onChange}
-                  value={movie.gener}
-                  label="Gener"
-                  type="search"
-                />
+                <TextField {...params} required label="Gener" />
               )}
             />
             <TextField
+              style={dark ? { background: "#eaeaea", color: "#fff" } : {}}
               required
               name="duration"
               value={movie.duration}
@@ -159,6 +165,7 @@ const EditMovie = (props: { movie: any }) => {
               onChange={onChange}
             />
             <TextField
+              style={dark ? { background: "#eaeaea", color: "#fff" } : {}}
               onChange={onChange}
               label="Trailer Link"
               name="trailerLink"
@@ -172,8 +179,12 @@ const EditMovie = (props: { movie: any }) => {
             </Button>
           </form>
         </DialogContent>
-        <DialogActions>
-          <Button onClick={closeDialog}>Cancel</Button>
+        <DialogActions
+          style={dark ? { background: "#444", color: "#fff" } : {}}
+        >
+          <Button onClick={closeDialog} style={dark ? { color: "#fff" } : {}}>
+            Cancel
+          </Button>
         </DialogActions>
       </Dialog>
     </div>
