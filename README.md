@@ -6,7 +6,7 @@ For running this app, do the next Steaps:</p>
 ## Running in Dev Mode
 
 <p> For thi just need to clone this <b>Repository</b> and run `npm install`
-later run `npm run start` and ¡you do it! the fron end is running</p>
+later run `npm run start` and ¡you do it! the front end is running</p>
 
 ## Running in Prod Mode
 
