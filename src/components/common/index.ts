@@ -1,3 +1,5 @@
-import url from "./url";
+import url, { publicFolder } from "./url";
 
-export { url };
+//this are Commons Public Consts
+
+export { url, publicFolder };

@@ -7,4 +7,6 @@ import NotFound404 from "./NotFound404/404";
 import Movie from "./Movie";
 import Actor from "./Actor";
 
+//This are all views in the page
+
 export { Home, Actors, Movies, NotFound404, Movie, Actor };

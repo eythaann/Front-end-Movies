@@ -71,12 +71,7 @@ const AddActor = () => {
 
   return (
     <div>
-      <Button
-        variant="outlined"
-        onClick={handleClickOpen}
-        fullWidth
-        variant="contained"
-      >
+      <Button onClick={handleClickOpen} fullWidth variant="contained">
         Add New Actor
       </Button>
       <Dialog open={open} onClose={handleClose}>

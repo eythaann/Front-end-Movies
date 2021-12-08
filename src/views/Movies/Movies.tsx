@@ -2,7 +2,7 @@ import styles from "./Movies.module.css";
 import { useEffect, useState } from "react";
 import { Api } from "../../components/hooks";
 import { Link } from "react-router-dom";
-import { url } from "../../components/common";
+import { publicFolder } from "../../components/common";
 import { Grow, Rating, Skeleton, TextField } from "@mui/material";
 import { AddMovie } from "../../components/layouts";
 
@@ -12,8 +12,9 @@ const Movies = () => {
   const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     Api("/movies").then((data) => {
-      if (data != undefined) {
+      if (data !== undefined) {
         setMovies(data);
         setLoaded(true);
         cache = data;
@@ -27,6 +28,7 @@ const Movies = () => {
       cache.filter((v: any) => v.title.toLowerCase().includes(searched))
     );
   };
+
   return (
     <div className="container">
       <div className="content">
@@ -49,7 +51,9 @@ const Movies = () => {
   );
 };
 
+//This is the principal Movie List
 const MovieList = (props: any): JSX.Element => {
+  //while the data is loading show a Skeletont Layer
   if (!props.loaded) {
     let loading = [];
     for (let i = 1; i <= 10; i++) {
@@ -65,6 +69,7 @@ const MovieList = (props: any): JSX.Element => {
     }
     return <div className={styles.moviesList}>{loading}</div>;
   }
+  //when the data is totally loaded show the movie List
   const list = props.movies.map((item: any, i: number) => {
     return (
       <Grow
@@ -75,7 +80,7 @@ const MovieList = (props: any): JSX.Element => {
       >
         <div className={styles.target}>
           <Link className={styles.a} to={`/movie/${item.id}`}>
-            <img src={url + item.img} alt={item.title} />
+            <img src={publicFolder + item.img} alt={item.title} />
           </Link>
           <div>
             <h3>{item.title}</h3>
@@ -88,6 +93,7 @@ const MovieList = (props: any): JSX.Element => {
       </Grow>
     );
   });
+
   return <div className={styles.moviesList}>{list}</div>;
 };
 

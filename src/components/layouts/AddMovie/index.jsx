@@ -85,12 +85,7 @@ const AddMovie = () => {
 
   return (
     <div>
-      <Button
-        variant="outlined"
-        onClick={handleClickOpen}
-        fullWidth
-        variant="contained"
-      >
+      <Button onClick={handleClickOpen} fullWidth variant="contained">
         Add New Movie
       </Button>
       <Dialog open={open} onClose={handleClose}>

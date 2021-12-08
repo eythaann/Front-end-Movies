@@ -1,5 +1,6 @@
 import { url } from "../common";
 
+//Api GET method
 const Api = async (params: string) => {
   try {
     const res = await fetch(url + params);

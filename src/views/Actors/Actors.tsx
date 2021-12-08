@@ -2,7 +2,7 @@ import styles from "./Actors.module.css";
 import { useEffect, useState } from "react";
 import { Api } from "../../components/hooks";
 import { Link } from "react-router-dom";
-import { url } from "../../components/common";
+import { publicFolder } from "../../components/common";
 import { Grow, Skeleton, TextField } from "@mui/material";
 import { AddActor } from "../../components/layouts";
 
@@ -12,8 +12,9 @@ const Actors = () => {
   const [actors, setActors] = useState([]);
   const [loaded, setLoaded] = useState(false);
   useEffect(() => {
+    window.scrollTo(0, 0);
     Api("/actors").then((data) => {
-      if (data != undefined) {
+      if (data !== undefined) {
         setActors(data);
         setLoaded(true);
         cache = data;
@@ -49,8 +50,9 @@ const Actors = () => {
     </div>
   );
 };
-
+//This is the principal Actors List
 const ActorsList = (props: any): JSX.Element => {
+  //while the data is loading show a Skeletont Layer
   if (!props.loaded) {
     let loading = [];
     for (let i = 1; i <= 10; i++) {
@@ -66,6 +68,8 @@ const ActorsList = (props: any): JSX.Element => {
     }
     return <div className={styles.moviesList}>{loading}</div>;
   }
+
+  //when the data is totally loaded show the movie List
   const list = props.actors.map((item: any, i: number) => {
     return (
       <Grow
@@ -76,7 +80,7 @@ const ActorsList = (props: any): JSX.Element => {
       >
         <div className={styles.target}>
           <Link className={styles.a} to={`/actor/${item.id}`}>
-            <img src={url + item.img} alt={item.name} />
+            <img src={publicFolder + item.img} alt={item.name} />
           </Link>
           <div>
             <h3>{item.name}</h3>

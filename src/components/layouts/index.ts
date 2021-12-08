@@ -9,6 +9,9 @@ import AddCast from "./AddCast";
 import EditMovie from "./EditMovie";
 import EditActor from "./EditActor";
 
+/*Here you gonna Find all Components Layouts 
+like buttons, or other things tha you can use  */
+
 export {
   Header,
   Footer,
