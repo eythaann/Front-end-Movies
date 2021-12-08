@@ -1,5 +1,5 @@
 import { useState } from "react";
-import style from "./AddMovie.module.css";
+import style from "./AddActor.module.css";
 import {
   Button,
   Dialog,
@@ -7,24 +7,23 @@ import {
   DialogContent,
   DialogContentText,
   DialogTitle,
-  Rating,
   TextField,
 } from "@mui/material";
 
 import { url } from "../../common";
 
-const AddMovie = () => {
+const AddActor = () => {
   const [open, setOpen] = useState(false);
   const [form, setForm] = useState({
-    title: "",
-    description: "",
-    trailerLink: "",
-    premiere: "2021-01-01",
-    rating: 0,
+    name: "",
+    biography: "",
+    born: "2021-01-01",
+    death: null,
+    place: "",
     image: "",
   });
   const [errorForm, setErrorForm] = useState({
-    description: false,
+    biography: false,
   });
 
   const handleClickOpen = () => {
@@ -36,37 +35,34 @@ const AddMovie = () => {
   };
 
   const onChange = (e) => {
-    if (e.target.name === "rating") {
-      setForm({ ...form, [e.target.name]: Number(e.target.value) });
-    } else {
-      setForm({ ...form, [e.target.name]: e.target.value });
-    }
+    setForm({ ...form, [e.target.name]: e.target.value });
   };
+
   const onChangeImg = (e) => {
     setForm({ ...form, [e.target.name]: e.target.files[0] });
   };
 
   const postmovie = async (e) => {
     e.preventDefault();
-    if (form.description.length < 30) {
-      setErrorForm({ ...errorForm, description: true });
+    if (form.biography.length < 30) {
+      setErrorForm({ ...errorForm, biography: true });
       return;
     }
 
     const formData = new FormData();
 
     for (let name in form) {
-      formData.append(name, form[name]);
+      formData.append(name, form[name] === null ? null : form[name]);
     }
     try {
-      const res = await fetch(url + "/movie", {
+      const res = await fetch(url + "/actor", {
         method: "POST",
         body: formData,
       });
       const data = await res.json();
       if (data.id) {
         setOpen(false);
-        window.location.replace("/movie/" + data.id);
+        window.location.replace("/actor/" + data.id);
       }
     } catch (err) {
       console.log(err);
@@ -81,58 +77,64 @@ const AddMovie = () => {
         fullWidth
         variant="contained"
       >
-        Add New Movie
+        Add New Actor
       </Button>
       <Dialog open={open} onClose={handleClose}>
-        <DialogTitle>New Movie</DialogTitle>
+        <DialogTitle>New Actor</DialogTitle>
         <DialogContent>
           <DialogContentText>Please fill all fields</DialogContentText>
           <form onSubmit={postmovie} className={style.form}>
             <TextField
               required={true}
-              name="title"
-              value={form.title}
+              name="name"
+              value={form.name}
               onChange={onChange}
-              label="Movie's Name"
+              label="Actor's Name"
               fullWidth
             />
             <TextField
               required
-              error={errorForm.description}
-              helperText="min length 30"
-              minRows="2"
-              name="description"
-              value={form.description}
+              name="place"
+              value={form.place}
               onChange={onChange}
               multiline
-              id="description"
-              label="Description"
+              label="Place"
               fullWidth
             />
             <TextField
               required
-              name="premiere"
-              value={form.premiere}
+              error={errorForm.biography}
+              helperText="min length 30"
+              minRows="2"
+              name="biography"
+              value={form.biography}
               onChange={onChange}
-              label="premiere"
+              multiline
+              label="Biography"
+              fullWidth
+            />
+            <TextField
+              required
+              name="born"
+              value={form.born}
+              onChange={onChange}
+              label="Born"
               type="date"
             />
-            <Rating name="rating" value={form.rating} onChange={onChange} />
+            <span> </span>
+            <TextField
+              name="death"
+              value={form.death}
+              onChange={onChange}
+              type="date"
+              helperText="Death: if is live, leave this empty"
+            />
             <TextField
               required
               name="image"
               type="file"
               fullWidth
               onChange={onChangeImg}
-            />
-            <TextField
-              required
-              name="trailerLink"
-              value={form.trailerLink}
-              label="Trailer Link"
-              type="url"
-              fullWidth
-              onChange={onChange}
             />
             <div>
               <Button type="submit" fullWidth variant="contained">
@@ -149,4 +151,4 @@ const AddMovie = () => {
   );
 };
 
-export default AddMovie;
+export default AddActor;

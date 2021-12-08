@@ -5,6 +5,7 @@ import { Api } from "../../components/hooks";
 import { Link } from "react-router-dom";
 import { url } from "../../components/common";
 import { Rating } from "@mui/material";
+import { DeleteMovie } from "../../components/layouts";
 
 const Movie = (): JSX.Element => {
   const [movie, setMovie] = useState({
@@ -46,7 +47,11 @@ const Movie = (): JSX.Element => {
           <img src={url + movie.img} alt={movie.title} />
         </div>
         <div className={style.movieDescription}>
-          <h1>{movie.title}</h1>
+          <div className={style.titles}>
+            <h1>{movie.title}</h1>
+            <DeleteMovie movieId={movie.id} />
+          </div>
+
           <Rating value={Number(movie.rating)} readOnly />
           <h3>General View</h3>
           <p>{movie.description}</p>

@@ -4,6 +4,7 @@ import { Api } from "../../components/hooks";
 import { Link } from "react-router-dom";
 import { url } from "../../components/common";
 import { Grow, TextField } from "@mui/material";
+import { AddActor } from "../../components/layouts";
 
 let cache: any = [];
 
@@ -37,6 +38,8 @@ const Actors = () => {
               type="search"
               onChange={search}
             />
+            <p>Don`t found a Actor? Add it!</p>
+            <AddActor />
           </div>
           <ActorsList loaded={loaded} actors={actors} />
         </div>

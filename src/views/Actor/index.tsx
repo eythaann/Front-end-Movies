@@ -4,6 +4,7 @@ import { useParams } from "react-router";
 import { Api } from "../../components/hooks";
 import { Link } from "react-router-dom";
 import { url } from "../../components/common";
+import { DeleteActor, AddInterpretation } from "../../components/layouts";
 
 const Actor = () => {
   const { id } = useParams();
@@ -43,11 +44,15 @@ const Actor = () => {
           <img src={url + actor.img} alt={actor.name} />
         </div>
         <div className={style.actorDescription}>
-          <h2>{actor.name}</h2>
+          <div className={style.titles}>
+            <h2>{actor.name}</h2>
+            <DeleteActor actorId={actor.id} />
+          </div>
           <br />
           <h3>Biography</h3>
           <p>{actor.biography}</p>
           <div style={{ position: "relative", top: "0", left: "0" }}>
+            <AddInterpretation actorId={actor.id} />
             <div className={style.interpretations}>
               {actor.interpretations.map((item: any) => (
                 <Link to={`/movie/${item.id}`} key={item.id}>

@@ -29,7 +29,10 @@
 .movieDescription {
   width: 70%;
 }
-
+.titles {
+  display: flex;
+  justify-content: space-between;
+}
 .cast {
   display: flex;
   overflow-x: auto;
