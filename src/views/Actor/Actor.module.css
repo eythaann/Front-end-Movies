@@ -34,6 +34,14 @@ img {
   width: 70%;
 }
 
+.titles {
+  display: flex;
+  justify-content: space-between;
+}
+.actions {
+  display: flex;
+}
+
 .interpretations {
   display: flex;
   overflow-x: auto;
@@ -44,10 +52,6 @@ img {
   padding-bottom: 10px;
 }
 
-.titles {
-  display: flex;
-  justify-content: space-between;
-}
 .interpretations > a {
   overflow: hidden;
   display: flex;
@@ -72,6 +76,7 @@ img {
   .actorImage {
     width: 100%;
     height: max(60vh, 400px);
+    margin-bottom: 1rem;
   }
   .actorDescription {
     width: 100%;

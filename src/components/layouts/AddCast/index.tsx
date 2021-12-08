@@ -65,23 +65,25 @@ const AddCast = (props: { movieId: string }) => {
   return (
     <div>
       <Button onClick={dialogOpen} variant="outlined">
-        + interpretations
+        + cast
       </Button>
       <Dialog open={open} onClose={dialogClose}>
-        <DialogTitle>Add interpretation</DialogTitle>
+        <DialogTitle>Add cast</DialogTitle>
         <DialogContent>
           <form onSubmit={submit} className={style.form}>
             <TextField
               name="interpretation"
+              label="interpretation"
               value={form.interpretation}
               onChange={onchange}
               required
+              fullWidth
             />
             <Autocomplete
               options={options.map(
                 (option: any) => option.name + " id:" + option.id
               )}
-              sx={{ width: 300 }}
+              fullWidth
               renderInput={(params) => (
                 <TextField
                   {...params}

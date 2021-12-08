@@ -4,7 +4,7 @@ import style from "./Header.module.css";
 const Header = (): JSX.Element => {
   return (
     <header className={style.header}>
-      <div>
+      <div className={style.logo}>
         <Link to="/">MOVIES SA</Link>
       </div>
       <div>

@@ -26,3 +26,16 @@ a:hover {
   background-color: #008b8b10;
   transition: linear 200ms;
 }
+
+@media only screen and (max-width: 600px) {
+  .header {
+    justify-content: center;
+  }
+  .logo {
+    display: none;
+  }
+  a {
+    padding: 8px 10px;
+    margin: 0 5px;
+  }
+}

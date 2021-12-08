@@ -20,7 +20,7 @@ const DeleteActor = (props) => {
   return (
     <Button
       onClick={del}
-      style={{ borderRadius: "15px", padding: "3px" }}
+      style={{ borderRadius: "15px", padding: "3px", height: "min-content" }}
       variant="contained"
       color="error"
     >

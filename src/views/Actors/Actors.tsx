@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { Api } from "../../components/hooks";
 import { Link } from "react-router-dom";
 import { url } from "../../components/common";
-import { Grow, TextField } from "@mui/material";
+import { Grow, Skeleton, TextField } from "@mui/material";
 import { AddActor } from "../../components/layouts";
 
 let cache: any = [];
@@ -13,9 +13,11 @@ const Actors = () => {
   const [loaded, setLoaded] = useState(false);
   useEffect(() => {
     Api("/actors").then((data) => {
-      setActors(data);
-      setLoaded(true);
-      cache = data;
+      if (data != undefined) {
+        setActors(data);
+        setLoaded(true);
+        cache = data;
+      }
     });
   }, []);
 
@@ -52,7 +54,15 @@ const ActorsList = (props: any): JSX.Element => {
   if (!props.loaded) {
     let loading = [];
     for (let i = 1; i <= 10; i++) {
-      loading.push(<div className={styles.targetLoading}></div>);
+      loading.push(
+        <Skeleton
+          key={i}
+          variant="rectangular"
+          width="100%"
+          height="100%"
+          style={{ borderRadius: "15px" }}
+        />
+      );
     }
     return <div className={styles.moviesList}>{loading}</div>;
   }

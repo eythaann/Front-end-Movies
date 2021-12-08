@@ -1,4 +1,5 @@
 import {
+  Autocomplete,
   Button,
   Dialog,
   DialogActions,
@@ -7,23 +8,33 @@ import {
   Rating,
   TextField,
 } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { url } from "../../common";
+import { Api } from "../../hooks";
 import style from "./EditMovie.module.css";
 
 const EditMovie = (props: { movie: any }) => {
   const [dialog, setDialog] = useState(false);
+  const [options, setOptions] = useState<any>([]);
   const [movie, setMovie] = useState<any>({
     title: props.movie.title,
     description: props.movie.description,
     premiere: props.movie.premiere.slice(0, 10),
     rating: props.movie.rating,
     trailerLink: props.movie.trailerLink,
+    gener: props.movie.gener,
+    duration: props.movie.duration,
     image: "",
   });
   const [errorForm, setErrorForm] = useState({
     description: false,
   });
+
+  useEffect(() => {
+    Api("/geners").then((data) => {
+      setOptions(data);
+    });
+  }, []);
 
   const showDialog = () => setDialog(true);
   const closeDialog = () => setDialog(false);
@@ -73,7 +84,12 @@ const EditMovie = (props: { movie: any }) => {
       <Button
         onClick={showDialog}
         variant="contained"
-        style={{ background: "#f1ccaa", borderRadius: "20px" }}
+        style={{
+          background: "#f1ccaa",
+          borderRadius: "20px",
+          padding: "3px",
+          height: "min-content",
+        }}
       >
         ✏️
       </Button>
@@ -116,6 +132,31 @@ const EditMovie = (props: { movie: any }) => {
               type="file"
               fullWidth
               helperText="If don't wanna change the cover photo leave this empty"
+            />
+            <Autocomplete
+              options={options.map((option: any) => option.tag)}
+              fullWidth
+              renderInput={(params) => (
+                <TextField
+                  {...params}
+                  required
+                  name="gener"
+                  onSelect={onChange}
+                  onChange={onChange}
+                  value={movie.gener}
+                  label="Gener"
+                  type="search"
+                />
+              )}
+            />
+            <TextField
+              required
+              name="duration"
+              value={movie.duration}
+              label="Duration in Minutes"
+              type="number"
+              fullWidth
+              onChange={onChange}
             />
             <TextField
               onChange={onChange}

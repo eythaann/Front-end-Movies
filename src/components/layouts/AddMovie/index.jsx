@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import style from "./AddMovie.module.css";
 import {
+  Autocomplete,
   Button,
   Dialog,
   DialogActions,
@@ -12,9 +13,11 @@ import {
 } from "@mui/material";
 
 import { url } from "../../common";
+import { Api } from "../../hooks";
 
 const AddMovie = () => {
   const [open, setOpen] = useState(false);
+  const [options, setOptions] = useState([]);
   const [form, setForm] = useState({
     title: "",
     description: "",
@@ -22,10 +25,19 @@ const AddMovie = () => {
     premiere: "2021-01-01",
     rating: 0,
     image: "",
+    gener: "",
+    duration: "",
   });
+
   const [errorForm, setErrorForm] = useState({
     description: false,
   });
+
+  useEffect(() => {
+    Api("/geners").then((data) => {
+      setOptions(data || []);
+    });
+  }, []);
 
   const handleClickOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -37,12 +49,14 @@ const AddMovie = () => {
       setForm({ ...form, [e.target.name]: e.target.value });
     }
   };
+
   const onChangeImg = (e) => {
     setForm({ ...form, [e.target.name]: e.target.files[0] });
   };
 
   const postmovie = async (e) => {
     e.preventDefault();
+
     if (form.description.length < 30) {
       setErrorForm({ ...errorForm, description: true });
       return;
@@ -59,6 +73,7 @@ const AddMovie = () => {
         body: formData,
       });
       const data = await res.json();
+
       if (data.id) {
         setOpen(false);
         window.location.replace("/movie/" + data.id);
@@ -104,21 +119,54 @@ const AddMovie = () => {
               label="Description"
               fullWidth
             />
-            <TextField
-              required
-              name="premiere"
-              value={form.premiere}
-              onChange={onChange}
-              label="premiere"
-              type="date"
-            />
-            <Rating name="rating" value={form.rating} onChange={onChange} />
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center",
+              }}
+            >
+              <TextField
+                required
+                name="premiere"
+                value={form.premiere}
+                onChange={onChange}
+                label="premiere"
+                type="date"
+              />
+              <Rating name="rating" value={form.rating} onChange={onChange} />
+            </div>
             <TextField
               required
               name="image"
               type="file"
               fullWidth
               onChange={onChangeImg}
+            />
+            <Autocomplete
+              options={options.map((option) => option.tag)}
+              fullWidth
+              renderInput={(params) => (
+                <TextField
+                  {...params}
+                  required
+                  name="gener"
+                  onSelect={onChange}
+                  onChange={onChange}
+                  value={form.gener}
+                  label="Gener"
+                  type="search"
+                />
+              )}
+            />
+            <TextField
+              required
+              name="duration"
+              value={form.duration}
+              label="Duration in Minutes"
+              type="number"
+              fullWidth
+              onChange={onChange}
             />
             <TextField
               required

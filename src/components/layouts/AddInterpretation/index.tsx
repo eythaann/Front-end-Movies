@@ -73,15 +73,17 @@ const AddInterpretations = (props: { actorId: string }) => {
           <form onSubmit={submit} className={style.form}>
             <TextField
               name="interpretation"
+              label="interpretation"
               value={form.interpretation}
               onChange={onchange}
               required
+              fullWidth
             />
             <Autocomplete
               options={options.map(
                 (option: any) => option.title + " id:" + option.id
               )}
-              sx={{ width: 300 }}
+              fullWidth
               renderInput={(params) => (
                 <TextField
                   {...params}

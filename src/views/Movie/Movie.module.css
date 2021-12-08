@@ -33,6 +33,10 @@
   display: flex;
   justify-content: space-between;
 }
+.actions {
+  display: flex;
+}
+
 .cast {
   display: flex;
   overflow-x: auto;
@@ -68,6 +72,7 @@
   .movieImage {
     width: 100%;
     height: max(60vh, 400px);
+    margin-bottom: 1rem;
   }
   .movieDescription {
     width: 100%;

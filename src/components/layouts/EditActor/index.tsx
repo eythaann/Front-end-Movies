@@ -68,7 +68,12 @@ const EditActor = (props: { actor: any }) => {
       <Button
         onClick={showDialog}
         variant="contained"
-        style={{ background: "#f1ccaa", borderRadius: "20px" }}
+        style={{
+          background: "#f1ccaa",
+          borderRadius: "20px",
+          padding: "3px",
+          height: "min-content",
+        }}
       >
         ✏️
       </Button>
