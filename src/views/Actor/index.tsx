@@ -4,7 +4,11 @@ import { useParams } from "react-router";
 import { Api } from "../../components/hooks";
 import { Link } from "react-router-dom";
 import { url } from "../../components/common";
-import { DeleteActor, AddInterpretation } from "../../components/layouts";
+import {
+  DeleteActor,
+  AddInterpretation,
+  EditActor,
+} from "../../components/layouts";
 
 const Actor = () => {
   const { id } = useParams();
@@ -46,7 +50,10 @@ const Actor = () => {
         <div className={style.actorDescription}>
           <div className={style.titles}>
             <h2>{actor.name}</h2>
-            <DeleteActor actorId={actor.id} />
+            <div>
+              <EditActor actor={actor} />
+              <DeleteActor actorId={actor.id} />
+            </div>
           </div>
           <br />
           <h3>Biography</h3>

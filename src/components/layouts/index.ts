@@ -6,6 +6,8 @@ import DeleteActor from "./DeleteActor";
 import DeleteMovie from "./DeleteMovie";
 import AddInterpretation from "./AddInterpretation";
 import AddCast from "./AddCast";
+import EditMovie from "./EditMovie";
+import EditActor from "./EditActor";
 
 export {
   Header,
@@ -16,4 +18,6 @@ export {
   DeleteMovie,
   AddInterpretation,
   AddCast,
+  EditMovie,
+  EditActor,
 };

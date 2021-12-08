@@ -5,7 +5,7 @@ import { Api } from "../../components/hooks";
 import { Link } from "react-router-dom";
 import { url } from "../../components/common";
 import { Rating } from "@mui/material";
-import { DeleteMovie } from "../../components/layouts";
+import { DeleteMovie, AddCast, EditMovie } from "../../components/layouts";
 
 const Movie = (): JSX.Element => {
   const [movie, setMovie] = useState({
@@ -49,7 +49,10 @@ const Movie = (): JSX.Element => {
         <div className={style.movieDescription}>
           <div className={style.titles}>
             <h1>{movie.title}</h1>
-            <DeleteMovie movieId={movie.id} />
+            <div>
+              <EditMovie movie={movie} />
+              <DeleteMovie movieId={movie.id} />
+            </div>
           </div>
 
           <Rating value={Number(movie.rating)} readOnly />
@@ -57,6 +60,7 @@ const Movie = (): JSX.Element => {
           <p>{movie.description}</p>
           <div style={{ position: "relative", top: "0", left: "0" }}>
             <h4>Casting: </h4>
+            <AddCast movieId={movie.id} />
             <div className={style.cast}>
               {movie.cast.map((item: any) => (
                 <Link to={`/actor/${item.id}`} key={item.id}>

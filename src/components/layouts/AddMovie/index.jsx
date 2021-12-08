@@ -27,13 +27,8 @@ const AddMovie = () => {
     description: false,
   });
 
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
+  const handleClickOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 
   const onChange = (e) => {
     if (e.target.name === "rating") {

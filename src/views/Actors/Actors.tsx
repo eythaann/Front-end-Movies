@@ -62,8 +62,9 @@ const ActorsList = (props: any): JSX.Element => {
         in={props.loaded}
         style={{ transformOrigin: "0 0 0" }}
         timeout={Math.min((i + 1) * 400, 2000)}
+        key={item.id}
       >
-        <div className={styles.target} key={item.id}>
+        <div className={styles.target}>
           <Link className={styles.a} to={`/actor/${item.id}`}>
             <img src={url + item.img} alt={item.name} />
           </Link>
